@@ -12,6 +12,7 @@
   inflect.irregular 'genero', 'generos'
   inflect.irregular 'prestamo', 'prestamos'
   inflect.irregular 'puntaje', 'puntajes'
+  inflect.irregular 'genero_pelicula', 'genero_peliculas'
   
 #   inflect.uncountable %w( fish sheep )
  end

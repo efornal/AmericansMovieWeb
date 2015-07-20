@@ -1,7 +1,61 @@
+require 'i18n'
+I18n.default_locale = :en
+
 RailsAdmin.config do |config|
 
-  ### Popular gems integration
+  config.excluded_models << "GeneroPelicula"
+  config.excluded_models << "Puntaje"
+  
+  config.model Genero do
+    field :nombre
+    field :peliculas do
+      nested_form false
+    end
+  end
 
+  config.model Pelicula do
+    list do
+      field :codigo
+      field :titulo
+      field :duracion
+      field :stock
+    end
+    edit do
+      field :codigo
+      field :titulo
+      field :director
+      field :origen
+      field :duracion
+      field :stock
+      field :generos
+    end
+    show do
+      field :codigo
+      field :titulo
+      field :director
+      field :origen
+      field :duracion
+      field :stock
+      field :generos
+    end
+    field :generos do
+      nested_form false
+    end
+    field :socios do
+      nested_form false
+    end
+  end
+
+  config.model Socio do
+    field :nro_socio
+    field :apellido
+    field :nombre
+    field :peliculas do
+      nested_form false
+    end
+  end
+
+  ### Popular gems integration
   ## == Devise ==
   # config.authenticate_with do
   #   warden.authenticate! scope: :user

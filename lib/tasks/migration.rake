@@ -45,6 +45,42 @@ namespace :migration do
 
     end
 
+    # Considera el siguiente orden de encabezado CSV:
+    # GENERO
+    desc 'Import generos from csv: rake migration:db:import_generos file=db/generos.csv'
+    task :import_generos => [:environment] do
+      
+      file_name = ENV['file']||nil
+
+      if file_name == nil
+         puts "Arguments error. Use: 'rake migration:db:import_from_csv file=db/generos.csv'"
+         exit (-1)
+      end
+      
+      require 'csv'
+      
+      CSV_PATH_FILE = file_name
+      CSV_COL_SEP = '|'
+      CSV_HEADERS = true
+
+      CSV.foreach( CSV_PATH_FILE,
+                   col_sep: CSV_COL_SEP,
+                   headers: CSV_HEADERS) do |row|
+
+        p = Hash.new
+        # map from csv file
+        p['nombre']   = row[0]
+
+        if genero = Genero.create(p)
+          puts "Created!: #{genero.nombre}"
+        else
+          puts "ERROR!:   #{genero.nombre}"
+        end
+  
+      end
+
+    end
+    
   end
 
 end

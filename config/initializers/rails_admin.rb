@@ -27,6 +27,7 @@ RailsAdmin.config do |config|
       field :origen
       field :duracion
       field :stock
+      field :imagen
       field :generos
     end
     show do
@@ -36,6 +37,7 @@ RailsAdmin.config do |config|
       field :origen
       field :duracion
       field :stock
+      field :imagen
       field :generos
     end
     field :generos do
